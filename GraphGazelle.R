@@ -21,7 +21,8 @@ ui <- dashboardPage(
   dashboardBody(
     
     fluidRow(
-      box(height = 200, width=6, imageOutput("animation") %>% withSpinner(color="blue", type=6)),
+      box(imageOutput("animation", inline=TRUE) %>% withSpinner(color="blue", type=6),  width=6),
+      #Need to inclue inline=TRUE in order to allow the image to fit in with the rest of the code - is there a better way to manually adjust them? It is stated that if inline=TRUE, height and width would need to be specified in renderPlot()
       box(width=6, plotOutput("scatterplot"))
     ),
     fluidRow(
@@ -34,9 +35,7 @@ ui <- dashboardPage(
       ),
     
    
-      box(
-        infoBoxOutput("distance")
-      )
+      infoBoxOutput("distance"),
       
     )
   )
@@ -66,7 +65,7 @@ server <- function(input, output) {
    # Return a list containing the filename
     rv$setupComplete <- TRUE
     
-    list(src = "www/gazelleanimation.gif",
+    list(src = "www/gazanimdate.gif",
          contentType = 'image/gif'
          # width = 400,
          # height = 300,
@@ -88,10 +87,12 @@ server <- function(input, output) {
     
     tripLength <- round(sqrt((dat$x2-dat$x1)**2 + (dat$y2-dat$y1)**2),digits=1)
     infoBox(
-      paste(unique(dat$subject),"Traveled",sep=" "), value = paste(sum(tripLength),"KM",sep=" "), color = "red", width = 4, fill = FALSE
+      title = paste(unique(dat$subject),"Traveled",sep=" "),
+      value = paste(sum(tripLength),"KM",sep=" "), color = "red", width = 4, fill = FALSE
       #title = "test", value="4 KM", color = "red", width = 4, fill = TRUE
     )
   })
+  
   output$setupComplete <- reactive({
     return(rv$setupComplete)
   })
