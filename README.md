@@ -267,4 +267,14 @@ shinyApp(ui, server)
 The program can be ran with GraphGazelle.R if you want to see the gif in the R Shiny Dashboard. Since producing gifs take up a lot of time to recreate them, I downloaded the gifs and displayed them manually. If you want to make gifs in real time, simply follow the instructions near the renderImage function, and change renderImage > renderPlot and imageOutput > plotOutput.
 
 Here is the animation produced:
+
 ![Output](www/gazanimdate.gif)
+
+Wonderful! But it was really hard finding all of the necessary packages, not to mention how system differences can prevent other from replicating these results. 
+One of the ways we can ensure that the code
+remains the same is to use [Docker](https://aws.amazon.com/docker/). Docker is a free container system that can be used to isolate applications and their dependencies in order to be able to share the application across the cloud with other users, connecting the workplace closer.
+
+To facilitate the use of my project across multiple systems, I compiled GraphGazelle.R along with other necessary files to create a Docker Container.
+
+Building a Docker file is relatively simple.
+1. Create a directory which has a Dockerfile .txt and include all of you desired repositories/files in it.
