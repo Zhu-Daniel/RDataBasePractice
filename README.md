@@ -278,3 +278,10 @@ To facilitate the use of my project across multiple systems, I compiled GraphGaz
 
 Building a Docker file is relatively simple.
 1. Create a directory which has a Dockerfile .txt and include all of you desired repositories/files in it.
+![](2020-01-15-15-51-19.png)
+
+2. In the Dockerfile, I based it off of [rocker/shiny](https://github.com/rocker-org/shiny), which helped built an R Shiny server for me. Make sure to edit the Dockerfile to apt-get and install any packages you need.
+3. Next, you should run docker build. If you are in the working directory, you only need to use .(period).
+    docker built .
+        can also include -t so that you can call the tag.
+4. Finally, just run docker run -p 3838:3838 (name/tag/ID/whatever), and the docker machine should run your R shiny server!
